@@ -42,5 +42,5 @@ def getProjectTickets():
 
 
 # just a test to make sure it pulls the right data
-for i in getServiceTickets():
-    print(i['id'], i['summary'], i['status']['name'])
+#for i in getServiceTickets():
+ #   print(i['id'], i['summary'], i['status']['name'])

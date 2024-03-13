@@ -1,16 +1,34 @@
-# This is a sample Python script.
+from cw import getServiceTickets
+import db
+from pprint import pprint
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    #FIXME Loop for every service ticket
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    #Read in data
+    complete_data = getServiceTickets()
+    
+    #Extract Specific Data (ticket_num, summary, schedule_date, technician)
+    for data in complete_data:
+        ticket_num = data['id']
+        summary = data['summary']
+        schedule_date = data[]
+        technician = 
+        #print(data['id'])
+
+    #for data in complete_data:
+        #print(data)
+'''if data == 'workRole':
+            print("JOE SMOE\n\n")'''
+
+print("Done")
+    #pprint(complete_data)
+    
+    
+    
+    
+    
+    
+    #Service_ID = 
+
+    #Export that specific data to the database
