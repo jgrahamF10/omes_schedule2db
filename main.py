@@ -1,34 +1,36 @@
-from cw import getServiceTickets
+from cw import getTickets, getSchedule
 import db
 from pprint import pprint
+from dateutil.parser import parse
+from datetime import datetime, timedelta
+import schedule
+from time import sleep
 
-if __name__ == '__main__':
-    #FIXME Loop for every service ticket
 
+def main():
     #Read in data
-    complete_data = getServiceTickets()
+    complete_data = getTickets()
     
     #Extract Specific Data (ticket_num, summary, schedule_date, technician)
     for data in complete_data:
-        ticket_num = data['id']
-        summary = data['summary']
-        schedule_date = data[]
-        technician = 
-        #print(data['id'])
+        if "Scheduled and assigned " in data['status']['name']:
+            ticket_num = data['id']
+            if not db.checkDupe(ticket_num):
+                installSched = getSchedule(data['id'])[0]
+                summary = data['summary']
+                tech = installSched['member']['name']
+                instalDate = parse(installSched['dateStart']).strftime("%Y-%m-%d %H:%M:%S")
+                try:
+                    db.addEntry(ticket_num, summary, instalDate, tech)
+                except Exception as E:
+                    print(E)
 
-    #for data in complete_data:
-        #print(data)
-'''if data == 'workRole':
-            print("JOE SMOE\n\n")'''
+    print(f"Done {(datetime.now() - timedelta(hours=5)).strftime("%m/%d/%Y, %H:%M")}")
 
-print("Done")
-    #pprint(complete_data)
-    
-    
-    
-    
-    
-    
-    #Service_ID = 
+schedule.every(4).hours.do(main)
 
-    #Export that specific data to the database
+if '__name__' == main():
+    main()
+    while True:
+        schedule.run_pending()
+        sleep(1)
