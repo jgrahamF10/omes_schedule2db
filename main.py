@@ -8,10 +8,10 @@ from time import sleep
 
 
 def main():
-    #Read in data
+    # Read in data
     complete_data = getTickets()
-    
-    #Extract Specific Data (ticket_num, summary, schedule_date, technician)
+
+    # Extract Specific Data (ticket_num, summary, schedule_date, technician)
     for data in complete_data:
         if "Scheduled and assigned " in data['status']['name']:
             ticket_num = data['id']
@@ -25,7 +25,8 @@ def main():
                 except Exception as E:
                     print(E)
 
-    print(f"Done {(datetime.now() - timedelta(hours=5)).strftime("%m/%d/%Y, %H:%M")}")
+    print(f"Done {(datetime.now() - timedelta(hours=5)).strftime('%m/%d/%Y, %H:%M')}")
+
 
 schedule.every(4).hours.do(main)
 
